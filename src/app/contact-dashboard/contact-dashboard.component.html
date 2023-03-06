@@ -1,0 +1,183 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">Contact-Manager</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <!-- Button trigger modal -->
+      <button
+        class="btn btn-warning text-white"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        (click)="handleAddContact()"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+</nav>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Adresse</th>
+      <th>Telephone</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contact of contactList; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ contact.nom | titlecase }}</td>
+      <td>{{ contact.prenom | titlecase }}</td>
+      <td>{{ contact.adresse }}</td>
+      <td>{{ contact.tel }}</td>
+      <td>{{ contact.email }}</td>
+      <td>
+        <button
+          class="btn btn-success me-2"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+          (click)="handleEditeContatc(contact)"
+        >
+          Edit
+        </button>
+        <button class="btn btn-danger" (click)="handleDeleteContact(contact)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="contactForm">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            {{ formTitle }}
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nom"
+              placeholder="Nom"
+              formControlName="nom"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="prenom" class="form-label">Prenom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="prenom"
+              placeholder="Prenom"
+              formControlName="prenom"
+              required=""
+            />
+          </div>
+          <div class="mb-3">
+            <label for="adresse" class="form-label">Adresse</label>
+            <input
+              type="text"
+              class="form-control"
+              id="adresse"
+              placeholder="Adresse"
+              formControlName="adresse"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="tel" class="form-label">Telephone</label>
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon1">Tel</span>
+              <input
+                id="tel"
+                type="number"
+                class="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                formControlName="tel"
+                required=""
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon2">@</span>
+              <input
+                id="email"
+                type="e-mail"
+                class="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon2"
+                formControlName="email"
+                required=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">
+            Annuler
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!contactForm.valid"
+            data-bs-dismiss="modal"
+            *ngIf="!editForm"
+            (click)="handleAddForm()"
+          >
+            Enregistrer
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!contactForm.valid"
+            data-bs-dismiss="modal"
+            *ngIf="editForm"
+            (click)="handleEditeForm()"
+          >
+            Modifier
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

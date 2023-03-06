@@ -1,0 +1,20 @@
+{
+  "contacts": [
+    {
+      "nom": "Doe",
+      "prenom": "Jonh",
+      "adresse": "Dakar/Hann mariste immeubles",
+      "tel": 770879898,
+      "email": "lucy@gmail.com",
+      "id": "7d899a3b-1ad4-35c7-160e-172bc031a5b7"
+    },
+    {
+      "id": "8dc4a030-469e-4dab-bdcf-3acc3e9410f8",
+      "nom": "less",
+      "prenom": "More",
+      "adresse": "Dakar/Hann mariste immeubles",
+      "tel": 770000000,
+      "email": "less@gmail.com"
+    }
+  ]
+}
